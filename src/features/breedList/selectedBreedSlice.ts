@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type SelectedBreed = {
+interface SelectedBreed {
   selectedBreed: string;
-};
+}
 
 const initialState: SelectedBreed = {
-  selectedBreed: "african",
+  selectedBreed: "affenpinscher",
 };
 
 const selectedBreedSlice = createSlice({
   name: "selectedBreed",
   initialState,
   reducers: {
-    setSelectedBreed(state, action) {
+    setSelectedBreed(state, action: PayloadAction<string>) {
       state.selectedBreed = action.payload;
     },
   },

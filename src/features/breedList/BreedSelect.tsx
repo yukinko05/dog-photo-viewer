@@ -9,7 +9,6 @@ const BreedSelect = () => {
   const status = useSelector(selectBreedStatus);
   const selectedBreed = useSelector((state: RootState) => state.selectedBreed.selectedBreed);
   const dispatch = useAppDispatch();
-  const breedKeys = breeds ? Object.keys(breeds) : [];
 
   useEffect(() => {
     dispatch(fetchBreedList());
@@ -24,22 +23,25 @@ const BreedSelect = () => {
     <div className='text-center mt-20'>
       {status === "pending" && <div>リスト取得中...</div>}
       {status === "failed" && <div>データが取得できませんでした</div>}
-      {status === "succeeded" && <label className="text-2xl text-slate-600">
-        Breeds List
-        <select
-          className="ml-4 border rounded-md px-2 py-1"
-          name="breeds"
-          value={selectedBreed}
-          onChange={handleSelectChange}
-        >
-          {breedKeys.map(breed => (
-            <option key={breed} value={breed}>
-              {breed}
-            </option>
-          ))}
-        </select>
-      </label>}
+      {status === "succeeded" && (
+        <label className="text-2xl text-slate-600">
+          Breeds List
+          <select
+            className="ml-4 border rounded-md px-2 py-1"
+            name="breeds"
+            value={selectedBreed || ""}
+            onChange={handleSelectChange}
+          >
+            {Object.keys(breeds).map(breed => (
+              <option key={breed} value={breed}>
+                {breed}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
     </div>
   );
 };
+
 export default BreedSelect;

@@ -8,33 +8,34 @@ export const fetchBreedList = createAsyncThunk("breedList", async () => {
 });
 
 export type BreedList = {
-  breeds: string | null;
+  breeds: Record<string, string[] | null>;
   status: "idle" | "pending" | "succeeded" | "failed";
-  error: undefined | string;
+  error?: string;
 };
 
 const initialState: BreedList = {
-  breeds: null,
+  breeds: {},
   status: "idle",
   error: undefined,
 };
 
-export const breedSlice = createSlice({
+const breedSlice = createSlice({
   name: "breedList",
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchBreedList.pending, (state) => {
-      state.status = "pending";
-    });
-    builder.addCase(fetchBreedList.fulfilled, (state, action) => {
-      state.breeds = action.payload;
-      state.status = "succeeded";
-    });
-    builder.addCase(fetchBreedList.rejected, (state, action) => {
-      state.error = action.error.message;
-      state.status = "failed";
-    });
+    builder
+      .addCase(fetchBreedList.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(fetchBreedList.fulfilled, (state, action) => {
+        state.breeds = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(fetchBreedList.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.status = "failed";
+      });
   },
 });
 
