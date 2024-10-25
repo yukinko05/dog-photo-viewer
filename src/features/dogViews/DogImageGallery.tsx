@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
-import { selectDogImages, fetchDogImages } from "../dogViews/dogImageSlice";
+import { fetchDogImages } from "./dogImageSlice";
+import { selectDogImages } from './selectors';
 import { useAppDispatch, RootState } from '../../app/store';
 import { useEffect } from 'react';
 
