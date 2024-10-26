@@ -6,7 +6,10 @@ const Home = () => {
     <div>
       <Header title={"Breed Buddies"} backgroundImage={"https://time-fun.fun/wp-content/uploads/2020/07/twitter-dog-14-1.jpg"} />
       <BreedSelect />
-      <DogImageGallery />
+      <div className="mt-4">
+        <DogImageGallery />
+
+      </div>
     </div>
   )
 }
